@@ -18,32 +18,38 @@ struct Count CountSentences(char text[], float words);
 float CountColemanLiauIndex(float letters, float sentences);
 void PrintGrade(float index);
 
+void HandleInput();
+
 // Main function for processing text
 void ProcessText(char text[]);
 
 int main() {
+  // Test cases below
+
   // Grade before 1
-  char testText1[] = "One fish. Two fish. Red fish. Blue fish.";
+  /*char testText1[] = "One fish. Two fish. Red fish. Blue fish.";*/
 
   // Grade 3
-  char testText2[] = "Congratulations! Today is your day. You're off to Great "
-                     "Places! You're off and away!";
+  /*char testText2[] = "Congratulations! Today is your day. You're off to Great "*/
+  /*                   "Places! You're off and away!";*/
 
   // Grade 10
-  char testText3[] =
-      "It was a bright cold day in April, and the clocks were striking "
-      "thirteen. Winston Smith, his chin nuzzled into his breast in an effort "
-      "to escape the vile wind, slipped quickly through the glass doors of "
-      "Victory Mansions, though not quickly enough to prevent a swirl of "
-      "gritty dust from entering along with him.";
+  /*char testText3[] =*/
+  /*    "It was a bright cold day in April, and the clocks were striking "*/
+  /*    "thirteen. Winston Smith, his chin nuzzled into his breast in an effort "*/
+  /*    "to escape the vile wind, slipped quickly through the glass doors of "*/
+  /*    "Victory Mansions, though not quickly enough to prevent a swirl of "*/
+  /*    "gritty dust from entering along with him.";*/
 
-  char testText4[] =
-      "A large class of computational problems involve the determination of "
-      "properties of graphs, digraphs, integers, arrays of integers, finite "
-      "families of finite sets, boolean formulas and elements of other "
-      "countable domains.";
+  /*char testText4[] =*/
+  /*    "A large class of computational problems involve the determination of "*/
+  /*    "properties of graphs, digraphs, integers, arrays of integers, finite "*/
+  /*    "families of finite sets, boolean formulas and elements of other "*/
+  /*    "countable domains.";*/
 
-  ProcessText(testText4);
+  HandleInput();
+
+  /*ProcessText(testText4);*/
 
   return 0;
 }
@@ -124,13 +130,21 @@ void ProcessText(char text[]) {
   struct Count sentences = CountSentences(text, words);
   float index = CountColemanLiauIndex(letters.avg, sentences.avg);
 
-  printf("In the text is %f words, %f letters and %f average letters per 100 "
-         "words\n",
-         words, letters.overall, letters.avg);
-  printf("There is %f sentences with %f average sentences per 100 words\n",
-         sentences.overall, sentences.avg);
+  printf("\n");
 
-  printf("Index is %f\n", index);
+  printf("Words: %.0f \n", words);
+  printf("Letters: %.0f (average %.2f per 100 words.)\n", letters.overall,
+         letters.avg);
+  printf("Sentences: %.0f (average %.2f per 100 words.)\n", sentences.overall,
+         sentences.avg);
+  printf("Coleman-Liau index: %.2f \n", index);
+
+  printf("\n");
 
   PrintGrade(index);
+}
+
+void HandleInput() {
+  string text = get_string("Enter text: ");
+  ProcessText(text);
 }
